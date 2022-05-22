@@ -230,7 +230,7 @@ class Util extends null {
     if (!token) throw new DiscordError('TOKEN_MISSING');
     const response = await fetch(RouteBases.api + Routes.gatewayBot(), {
       method: 'GET',
-      headers: { Authorization: `Bot ${token.replace(/^Bot\s*/i, '')}` },
+      headers: { Authorization: `${token}` },
     });
     if (!response.ok) {
       if (response.status === 401) throw new DiscordError('TOKEN_INVALID');
