@@ -226,18 +226,16 @@ class Util extends null {
    * @param {FetchRecommendedShardsOptions} [options] Options for fetching the recommended shard count
    * @returns {Promise<number>} The recommended number of shards
    */
-  static async fetchRecommendedShards(token, { guildsPerShard = 1_000, multipleOf = 1 } = {}) {
-    if (!token) throw new DiscordError('TOKEN_MISSING');
-    const response = await fetch(RouteBases.api + Routes.gatewayBot(), {
-      method: 'GET',
-      headers: { Authorization: `${token}` },
+   static fetchRecommendedShards(token, guildsPerShard = 1000) {
+    return new Promise((resolve, reject) => {
+      if (!token) throw new Error('A token must be provided.');
+      snekfetch.get(`${ConstantsHttp.host}/api/v${ConstantsHttp.version}${Constants.Endpoints.gateway.bot}`)
+        .set('Authorization', `Bot ${token.replace(/^Bot\s*/i, '')}`)
+        .end((err, res) => {
+          if (err) reject(err);
+          resolve(res.body.shards * (1000 / guildsPerShard));
+        });
     });
-    if (!response.ok) {
-      if (response.status === 401) throw new DiscordError('TOKEN_INVALID');
-      throw response;
-    }
-    const { shards } = await response.json();
-    return Math.ceil((shards * (1_000 / guildsPerShard)) / multipleOf) * multipleOf;
   }
 
   /**
