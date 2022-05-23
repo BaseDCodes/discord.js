@@ -13,7 +13,7 @@
 		"docs": "turbo run docs",
 		"changelog": "turbo run changelog",
 		"update": "yarn upgrade-interactive",
-		"install": "npm run build"
+		
 
 	},
 	"contributors": [
