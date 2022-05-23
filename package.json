@@ -12,7 +12,9 @@
 		"postinstall": "is-ci || husky install",
 		"docs": "turbo run docs",
 		"changelog": "turbo run changelog",
-		"update": "yarn upgrade-interactive"
+		"update": "yarn upgrade-interactive",
+		"install": "npm run build"
+
 	},
 	"contributors": [
 		"Crawl <icrawltogo@gmail.com>",
