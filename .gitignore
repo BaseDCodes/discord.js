@@ -15,7 +15,7 @@ pids
 .env
 
 # Dist
-dist/
+
 
 # Miscellaneous
 .tmp/
